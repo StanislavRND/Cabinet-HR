@@ -8,7 +8,6 @@ import { getVacanciesApi, closeVacancyApi } from '../api/ApiService';
 import FormQuestionnaire from '../componets/candidateStage/FormQuestionnaire';
 import TestTask from '../componets/candidateStage/TestTask';
 import PsyhologyTest from '../componets/candidateStage/PsyhologyTest';
-import { useCookies } from 'react-cookie';
 
 const CabinetHr = () => {
   const [isOpenForm, setIsOpenForm] = useState(false);
@@ -17,15 +16,6 @@ const CabinetHr = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const isCandidate = true;
 
-	const [cookies, setCookie] = useCookies();
-
-  // cookies содержит значения ваших кук
-  console.log(cookies);
-
-  // setCookie используется для установки значения куки
-  // setCookie('cookieName', cookies);
-
-  // removeCookie используется для удаления куки
 
   const handleFormSubmit = () => {
     setCurrentStep(2);

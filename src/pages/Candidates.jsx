@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../componets/header/Header';
 import CandidateItem from '../componets/candidateItem/CandidateItem';
+import Questionare from '../componets/questionaire/Questionare';
 
 
 const Candidates = () => {
@@ -11,6 +12,7 @@ const Candidates = () => {
         <div className="candidates__title">Кандидаты</div>
         <div className="candidates">
 					<CandidateItem/>
+					<Questionare/>
 				</div>
       </div>
     </div>
