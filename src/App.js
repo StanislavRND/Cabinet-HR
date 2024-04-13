@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import Auth from './pages/Auth';
+import Vacancies from './pages/Vacancies.jsx';
+import Candidates from './pages/Candidates.jsx';
+import Events from './pages/Events.jsx';
+import CalendarChange from './pages/CalendarChange.jsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Auth />} />
+        <Route path="/vacancies" element={<Vacancies />} />
+				<Route path="/candidates" element={<Candidates />} />
+				<Route path="/events" element={<Events />} />
+				<Route path="/calendar" element={<CalendarChange />} />
+      </Routes>
     </div>
   );
 }
