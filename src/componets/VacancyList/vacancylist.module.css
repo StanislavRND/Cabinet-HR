@@ -12,7 +12,11 @@
 .vacancy__list {
   margin-top: 20px;
 }
-
+.items {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
 .item {
   border: 1.5px solid #274f7d;
   border-radius: 4px;

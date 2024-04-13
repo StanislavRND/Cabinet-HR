@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../../api/ApiService';
 
 const FormAuth = () => {
 	const navigate = useNavigate();
@@ -12,6 +13,7 @@ const FormAuth = () => {
 
   const onSubmit = (data) => {
     console.log(data); 
+		auth(data.email, data.pass)
 		navigate('/vacancies')
   }
   return (

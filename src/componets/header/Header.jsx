@@ -4,7 +4,6 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
-  const isCandidate = true;
 
   return (
     <div className={styles.header}>
@@ -13,18 +12,17 @@ const Header = () => {
         <nav className={styles.nav}>
           <ul className={styles.items}>
             <li className={styles.item}>
-              <Link to="/vacancies">{isCandidate ? 'Личный кабинет' : 'Вакансии'}</Link>
+              <Link to="/vacancies">Вакансии</Link>
             </li>
-            {!isCandidate && (
-              <>
-                <li className={styles.item}>
-                  <Link to="/candidates">Кандидаты</Link>
-                </li>
-                <li className={styles.item}>
-                  <Link to="/employees">Сотрудники</Link>
-                </li>
-              </>
-            )}
+
+            <>
+              <li className={styles.item}>
+                <Link to="/candidates">Кандидаты</Link>
+              </li>
+              <li className={styles.item}>
+                <Link to="/employees">Сотрудники</Link>
+              </li>
+            </>
 
             <li className={styles.item}>
               <Link to="/events">Мероприятия</Link>

@@ -113,10 +113,8 @@ const ModalCreateVacancy = ({ setIsOpenVacancyInfo, setIsOpenForm }) => {
           <select
             className={styles.input}
             {...register('departament', { required: 'Поле не должно быть пустым' })}>
-            <option value='5'>Маркетинговый отдел</option>
-            <option value='4'>Юридический отдел</option>
+            <option value='2'>Маркетинговый отдел</option>
             <option value='3'>IT-отдел</option>
-            <option value='2'>Бухгалтерия</option>
             <option value='1'>Отдел безопасностей</option>
           </select>
         </div>

@@ -4,17 +4,28 @@ import FormCreateVacancy from '../componets/forms/formCreateVacancy/FormCreateVa
 import Header from '../componets/header/Header';
 import VacancyList from '../componets/VacancyList/VacancyList';
 import VacancyInfo from './../componets/VacancyInfo/VacancyInfo';
-import { getVacanciesApi } from '../api/ApiService';
+import { getVacanciesApi, closeVacancyApi } from '../api/ApiService';
 import FormQuestionnaire from '../componets/candidateStage/FormQuestionnaire';
 import TestTask from '../componets/candidateStage/TestTask';
 import PsyhologyTest from '../componets/candidateStage/PsyhologyTest';
+import { useCookies } from 'react-cookie';
 
 const CabinetHr = () => {
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [isOpenVacancyInfo, setIsOpenVacancyInfo] = useState(false);
   const [vacancies, setVacancies] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
-  const isCandidate = false;
+  const isCandidate = true;
+
+	const [cookies, setCookie] = useCookies();
+
+  // cookies содержит значения ваших кук
+  console.log(cookies);
+
+  // setCookie используется для установки значения куки
+  // setCookie('cookieName', cookies);
+
+  // removeCookie используется для удаления куки
 
   const handleFormSubmit = () => {
     setCurrentStep(2);
@@ -32,9 +43,11 @@ const CabinetHr = () => {
     setIsOpenVacancyInfo(false);
   };
 
+  const closeVacancy = closeVacancyApi(setVacancies);
+
   useEffect(() => {
-  	getVacanciesApi(setVacancies)
-  }, []);
+    getVacanciesApi(setVacancies);
+  }, [setVacancies]);
   console.log(vacancies);
   return (
     <div>
@@ -68,37 +81,46 @@ const CabinetHr = () => {
               {!isOpenForm && !isOpenVacancyInfo && (
                 <div className="hr-list__vacancies">
                   <div className="hr-list__title">Список вакансий</div>
-                  <VacancyList vacancies={vacancies} setIsOpenVacancyInfo={setIsOpenVacancyInfo} />
+                  <VacancyList
+                    vacancies={vacancies}
+                    closeVacancy={closeVacancy}
+                    setIsOpenVacancyInfo={setIsOpenVacancyInfo}
+                  />
                 </div>
               )}
             </>
           ) : (
-            <div>
+            <div className="block__stages">
+              {currentStep === 1 && <FormQuestionnaire handleFormSubmit={handleFormSubmit} />}
+              {currentStep === 2 && <TestTask handleTest1Complete={handleTest1Complete} />}
+              {currentStep === 3 && <PsyhologyTest handleTest2Complete={handleTest2Complete} />}
+              {currentStep === 4 && (
+                <div>
+                  Вы прошли все этапы <br />
+                  Ждите результата!
+                </div>
+              )}
               <div className="stages">
                 {' '}
                 <div
                   style={{
-                    color: currentStep === 1 ? 'green' : 'blue',
+                    color: currentStep === 1 ? '#029c02' : '#b4b4b4',
                   }}>
-                  Этап 1
+                  Заполнение анкеты
                 </div>
                 <div
                   style={{
-                    color: currentStep === 2 ? 'green' : 'blue',
+                    color: currentStep === 2 ? '#029c02' : '#b4b4b4',
                   }}>
-                  Этап 2
+                  Тестовое задание
                 </div>
                 <div
                   style={{
-                    color: currentStep === 3 ? 'green' : 'blue',
+                    color: currentStep === 3 ? '#029c02' : '#b4b4b4',
                   }}>
-                  Этап 3
+                  Психологический тест
                 </div>
               </div>
-              {currentStep === 1 && <FormQuestionnaire handleFormSubmit={handleFormSubmit} />}
-              {currentStep === 2 && <TestTask handleTest1Complete={handleTest1Complete} />}
-              {currentStep === 3 && <PsyhologyTest handleTest2Complete={handleTest2Complete} />}
-              {currentStep === 4 && <div>Вы прошли все этапы <br/>Ждите результата!</div>}
             </div>
           )}
         </div>
